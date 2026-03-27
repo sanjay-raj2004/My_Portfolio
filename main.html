@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sanjay Raj V – AI & Data Science Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #080c14;
+  --bg2: #0d1220;
+  --bg3: #111827;
+  --card: #131c2e;
+  --border: #1e2d45;
+  --accent: #38bdf8;
+  --accent2: #818cf8;
+  --accent3: #34d399;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --heading: #f8fafc;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 4rem;
+  background: rgba(8,12,20,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--heading);
+  letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 4rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);
+  top: 10%; left: -100px;
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(129,140,248,0.1) 0%, transparent 70%);
+  bottom: 10%; right: 5%;
+  pointer-events: none;
+}
+.hero-content { max-width: 700px; position: relative; z-index: 1; }
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(56,189,248,0.1);
+  border: 1px solid rgba(56,189,248,0.25);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: var(--heading);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  margin-bottom: 0.3rem;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero h1 .highlight {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+.hero-desc {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.btn-primary {
+  padding: 0.75rem 1.8rem;
+  background: var(--accent);
+  color: #080c14;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.2px;
+}
+.btn-primary:hover { background: #7dd3fc; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(56,189,248,0.3); }
+.btn-secondary {
+  padding: 0.75rem 1.8rem;
+  background: transparent;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  animation: fadeUp 0.6s 0.5s ease both;
+}
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--heading);
+  line-height: 1;
+}
+.stat-num span { color: var(--accent); }
+.stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; letter-spacing: 0.3px; }
+
+@keyframes fadeUp { from { opacity:0; transform: translateY(24px); } to { opacity:1; transform: translateY(0); } }
+
+/* SECTIONS */
+section { padding: 6rem 4rem; position: relative; z-index: 1; }
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--heading);
+  letter-spacing: -1px;
+  margin-bottom: 3rem;
+}
+.section-title span { color: var(--accent); }
+
+/* ABOUT */
+#about { background: var(--bg2); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.about-text p { color: #94a3b8; margin-bottom: 1rem; font-size: 0.95rem; }
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.skill-tag {
+  padding: 0.35rem 0.9rem;
+  background: rgba(56,189,248,0.08);
+  border: 1px solid rgba(56,189,248,0.2);
+  color: var(--accent);
+  font-size: 0.78rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.about-info { display: flex; flex-direction: column; gap: 1rem; }
+.info-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.info-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.info-icon.blue { background: rgba(56,189,248,0.12); }
+.info-icon.purple { background: rgba(129,140,248,0.12); }
+.info-icon.green { background: rgba(52,211,153,0.12); }
+.info-label { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.1rem; }
+.info-val { font-size: 0.9rem; color: var(--heading); font-weight: 500; }
+
+/* PROJECTS */
+#projects { background: var(--bg); }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.8rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.project-card:hover { transform: translateY(-6px); border-color: rgba(56,189,248,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+.project-card:hover::before { opacity: 1; }
+.project-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: rgba(56,189,248,0.1);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.project-type {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent3);
+  margin-bottom: 0.5rem;
+}
+.project-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+.project-desc { font-size: 0.87rem; color: #94a3b8; margin-bottom: 1.2rem; line-height: 1.6; }
+.tech-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+.tech-badge {
+  padding: 0.2rem 0.6rem;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.72rem;
+  border-radius: 4px;
+}
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+.project-link:hover { gap: 0.7rem; }
+
+/* INTERNSHIPS */
+#internships { background: var(--bg2); }
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-left: 2rem;
+}
+.timeline-dot {
+  position: absolute;
+  left: -2.42rem;
+  top: 0.4rem;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(56,189,248,0.5);
+}
+.timeline-date {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+}
+.timeline-role {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--heading);
+  margin-bottom: 0.2rem;
+}
+.timeline-company { font-size: 0.85rem; color: var(--accent2); margin-bottom: 0.6rem; font-weight: 500; }
+.timeline-desc { font-size: 0.87rem; color: #94a3b8; }
+
+/* CERTIFICATIONS */
+#certifications { background: var(--bg); }
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+.cert-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.4rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.cert-card:hover { border-color: rgba(129,140,248,0.4); transform: translateY(-3px); }
+.cert-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.cert-icon.purple { background: rgba(129,140,248,0.12); }
+.cert-icon.blue { background: rgba(56,189,248,0.12); }
+.cert-icon.orange { background: rgba(251,146,60,0.12); }
+.cert-icon.green { background: rgba(52,211,153,0.12); }
+.cert-name { font-size: 0.88rem; font-weight: 600; color: var(--heading); margin-bottom: 0.2rem; line-height: 1.3; }
+.cert-issuer { font-size: 0.75rem; color: var(--muted); }
+
+/* CONTACT */
+#contact { background: var(--bg2); }
+.contact-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.contact-inner .section-label, .contact-inner .section-title { text-align: center; }
+.contact-inner .section-title { margin-bottom: 1rem; }
+.contact-sub { color: #94a3b8; font-size: 0.93rem; margin-bottom: 3rem; }
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem 1.5rem;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.contact-card:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.contact-card .icon { font-size: 1.1rem; }
+
+/* FOOTER */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  position: relative;
+  z-index: 1;
+}
+footer span { color: var(--accent); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero, section { padding: 5rem 1.5rem 3rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-stats { gap: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Sanjay<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#internships">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">AI & Data Science Engineer – Open to Opportunities</div>
+    <h1>Sanjay <span class="highlight">Raj V</span></h1>
+    <p class="hero-sub">AI & Data Science Engineer</p>
+    <p class="hero-desc">B.Tech student specializing in Artificial Intelligence and Data Science at SNS College of Engineering, Coimbatore. Passionate about building intelligent systems and data-driven solutions.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="https://github.com/sanjay-raj2004" target="_blank" class="btn-secondary">GitHub Profile →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">8.0<span>/10</span></div>
+        <div class="stat-label">CGPA</div>
+      </div>
+      <div>
+        <div class="stat-num">4<span>+</span></div>
+        <div class="stat-label">Internships</div>
+      </div>
+      <div>
+        <div class="stat-num">3<span>+</span></div>
+        <div class="stat-label">Projects</div>
+      </div>
+      <div>
+        <div class="stat-num">6<span>+</span></div>
+        <div class="stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <div class="section-title">About <span>Me</span></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a final-year B.Tech student in Artificial Intelligence and Data Science from SNS College of Engineering, Coimbatore, India. I have a strong foundation in machine learning, data analytics, and full-stack development.</p>
+      <p>My work spans across building predictive ML models, designing analytical dashboards, and developing full-stack web applications. I'm driven by curiosity and a desire to solve real-world problems using data and AI.</p>
+      <div class="skills-grid">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Data Visualization</span>
+      </div>
+    </div>
+    <div class="about-info">
+      <div class="info-card">
+        <div class="info-icon blue">🎓</div>
+        <div>
+          <div class="info-label">Education</div>
+          <div class="info-val">B.Tech – AI & Data Science</div>
+          <div class="info-label" style="margin-top:2px">SNS College of Engineering, Coimbatore</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon purple">📊</div>
+        <div>
+          <div class="info-label">CGPA</div>
+          <div class="info-val">8.0 / 10</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon green">📍</div>
+        <div>
+          <div class="info-label">Location</div>
+          <div class="info-val">Coimbatore, Tamil Nadu, India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've Built</div>
+  <div class="section-title">Featured <span>Projects</span></div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-type">Machine Learning</div>
+      <div class="project-name">Software Failure Prediction System</div>
+      <div class="project-desc">Developed a ML model to predict software failures using historical data. Applied data preprocessing, feature engineering, and classification algorithms to identify failure-prone modules in advance — reducing software maintenance costs.</div>
+      <div class="tech-stack">
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">Scikit-learn</span>
+        <span class="tech-badge">Pandas</span>
+        <span class="tech-badge">NumPy</span>
+        <span class="tech-badge">Matplotlib</span>
+      </div>
+      <a href="https://github.com/sanjay-raj2004/Software_failure_prediction" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-type">Data Analytics</div>
+      <div class="project-name">E-Commerce Sales Dashboard</div>
+      <div class="project-desc">Interactive sales analytics dashboard using the Olist E-Commerce dataset. Visualizes key business metrics — revenue trends, regional performance, product category analysis, and customer behaviour — for data-driven decision making.</div>
+      <div class="tech-stack">
+        <span class="tech-badge">Tableau</span>
+        <span class="tech-badge">Excel</span>
+        <span class="tech-badge">Python</span>
+        <span class="tech-badge">Data Cleaning</span>
+      </div>
+      <a href="https://github.com/sanjay-raj2004/olist-ecommerce-sales-dashboard" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-type">Full Stack Development</div>
+      <div class="project-name">Smart Task Management System</div>
+      <div class="project-desc">Full-stack task management web app with user authentication, task creation, assignment, priority setting, and real-time status tracking. Built with a responsive UI and RESTful API backend using the MERN stack.</div>
+      <div class="tech-stack">
+        <span class="tech-badge">MongoDB</span>
+        <span class="tech-badge">Express.js</span>
+        <span class="tech-badge">React.js</span>
+        <span class="tech-badge">Node.js</span>
+      </div>
+      <a href="https://github.com/sanjay-raj2004/Smart-Task-Management" target="_blank" class="project-link">View on GitHub →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- INTERNSHIPS -->
+<section id="internships">
+  <div class="section-label">Work Experience</div>
+  <div class="section-title">Internship <span>Experience</span></div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background: var(--accent3); box-shadow: 0 0 12px rgba(52,211,153,0.5);"></div>
+      <div class="timeline-date">2024</div>
+      <div class="timeline-role">Data Analysis Intern</div>
+      <div class="timeline-company">Cognifyz Technologies</div>
+      <div class="timeline-desc">Worked on real-world data analysis tasks involving data cleaning, exploration, and visualization. Applied analytical techniques to derive meaningful insights and support data-driven decision making.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background: var(--accent2); box-shadow: 0 0 12px rgba(129,140,248,0.5);"></div>
+      <div class="timeline-date">2024</div>
+      <div class="timeline-role">Machine Learning Intern</div>
+      <div class="timeline-company">Cognifyz Technologies</div>
+      <div class="timeline-desc">Developed and evaluated machine learning models for practical use cases. Gained hands-on experience in model building, training, and performance evaluation using Python-based ML frameworks.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">March 2025 – May 2025</div>
+      <div class="timeline-role">Web Development Intern</div>
+      <div class="timeline-company">Glaciosoft Technology Solutions Pvt. Ltd., Chennai</div>
+      <div class="timeline-desc">Served as an Intern Web Developer (L1), demonstrating technical proficiency, collaborative spirit, and a strong willingness to learn. Contributed to live web development projects and gained hands-on experience in frontend and backend technologies.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background: var(--accent2); box-shadow: 0 0 12px rgba(129,140,248,0.5);"></div>
+      <div class="timeline-date">July 2024</div>
+      <div class="timeline-role">Full Stack Developer Intern</div>
+      <div class="timeline-company">Nitroware Technologies, Coimbatore</div>
+      <div class="timeline-desc">Explored full-stack development skills during the internship period. Demonstrated professionalism, a strong work ethic, and a keen willingness to learn. Contributed to team projects with valuable technical and collaborative input.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Learning & Growth</div>
+  <div class="section-title">Certifications <span>&amp; Courses</span></div>
+  <div class="certs-grid">
+
+    <div class="cert-card">
+      <div class="cert-icon green">📊</div>
+      <div>
+        <div class="cert-name">Data Science</div>
+        <div class="cert-issuer">PrepInsta</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon blue">🐍</div>
+      <div>
+        <div class="cert-name">Python Nano Degree</div>
+        <div class="cert-issuer">PrepInsta</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon purple">🧮</div>
+      <div>
+        <div class="cert-name">Mathematics for Machine Learning: Multivariate Calculus</div>
+        <div class="cert-issuer">Imperial College London – Coursera</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon blue">🐍</div>
+      <div>
+        <div class="cert-name">Python for Placement Readiness</div>
+        <div class="cert-issuer">ByteXL – SNS Institutions, Coimbatore</div>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-icon orange">☕</div>
+      <div>
+        <div class="cert-name">Learn Java Programming – Beginner to Master</div>
+        <div class="cert-issuer">Udemy – Abdul Bari (61.5 hrs)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Get In Touch</div>
+    <div class="section-title">Let's <span>Connect</span></div>
+    <p class="contact-sub">Feel free to reach out for collaborations, opportunities, or just to say hello!</p>
+    <div class="contact-links">
+      <a href="mailto:vsanjusan05@gmail.com" class="contact-card">
+        <span class="icon">✉️</span> vsanjusan05@gmail.com
+      </a>
+      <a href="https://github.com/sanjay-raj2004" target="_blank" class="contact-card">
+        <span class="icon">🐙</span> GitHub
+      </a>
+      <a href="https://linkedin.com/in/sanjay-raj-v" target="_blank" class="contact-card">
+        <span class="icon">💼</span> LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & Built by <span>Sanjay Raj V</span> &nbsp;·&nbsp; B.Tech AI & DS, SNS College of Engineering</p>
+</footer>
+
+</body>
+</html>
